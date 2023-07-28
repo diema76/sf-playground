@@ -4,6 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 # MyProject
 .github/*
+.pmd-apex-rules.xml
 
 # User-specific files
 *.rsuser
