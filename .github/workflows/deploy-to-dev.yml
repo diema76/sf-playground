@@ -56,7 +56,7 @@ jobs:
              npm install @salesforce/cli --global
              echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > server.key
              sfdx force:auth:jwt:grant --client-id=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwt-key-file=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --set-default-dev-hub --alias devjwt        
-             sfdx apex:test:run -l RunSpecifiedTests --class-names "`echo "$CLASSLIST" | sed 's/\,$//'`" --synchronous --result-format human --loglevel ${{ vars.SFDX_LOG_LEVEL }} -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --codecoverage -d ./ 
+             sfdx apex:test:run -l RunSpecifiedTests --class-names "`echo "$CLASSLIST" | sed 's/\,$//'`" --synchronous --result-format human --loglevel ${{ vars.SFDX_LOG_LEVEL }} --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --code-coverage 
              #> testlog/file$(date +"%Y_%m_%d_%H_%M_%S").txt
             fi
 
