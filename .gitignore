@@ -4,7 +4,17 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 # MyProject
 .github/*
-.pmd-apex-rules.xml
+pmd-apex-rules.xml
+script/*
+config/*
+.eslintignore
+.prettierrc
+.prettierignore
+jest.config.js
+package.json
+sfdx-project.json
+*.md
+
 
 # User-specific files
 *.rsuser
