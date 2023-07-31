@@ -40,11 +40,10 @@ jobs:
           id: set-apex-list
           run: |
             CLASSLIST=''
-            pattern="_Test.cls$"
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               #echo "file: $file"
-              if (echo "$file" | grep -q "$pattern"); then
-                  CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
+              if (echo "$file" | grep -q "${{ secrets.SF_YAML_PATTERN_TestClass }}"); then
+                  CLASSLIST+="`echo $file | ${{ secrets.SF_YAML_GETNAME }}`,"
               fi
             done
             #echo "TESTCLASSLIST: ${{ vars.TESTCLASSLIST }}"
