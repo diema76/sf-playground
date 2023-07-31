@@ -40,21 +40,24 @@ jobs:
           id: set-apex-list
           run: |
             CLASSLIST=''
-            tmpfile=''
+            pattern="_Test.cls$"
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-              if [[ $file =~ "_Test" ]]; then
+              #echo "file: $file"
+              if (echo "$file" | grep -q "$pattern"); then
                   CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
               fi
             done
-            echo "TESTCLASSLIST:"
-            echo ${{ vars.TESTCLASSLIST }}
-            echo "CLASSLIST:"
-            echo "$CLASSLIST" | sed 's/\,$//'
+            #echo "TESTCLASSLIST:"
+            #echo ${{ vars.TESTCLASSLIST }}
+            echo "FINAL CLASSLIST: $CLASSLIST"
+            mkdir -p testlog/
             if [[ $CLASSLIST != '' ]]; then
+             echo "Avvio run test class"
              npm install @salesforce/cli --global
              echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > server.key
              sfdx force:auth:jwt:grant --client-id=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwt-key-file=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --set-default-dev-hub --alias devjwt        
-             sfdx force:apex:test:run -l RunSpecifiedTests --class-names "`echo "$CLASSLIST" | sed 's/\,$//'`" --synchronous --result-format human --loglevel error -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+             sfdx apex:test:run -l RunSpecifiedTests --class-names "`echo "$CLASSLIST" | sed 's/\,$//'`" --synchronous --result-format human --loglevel error -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} 
+             #> testlog/file$(date +"%Y_%m_%d_%H_%M_%S").txt
             fi
 
   deployment:
