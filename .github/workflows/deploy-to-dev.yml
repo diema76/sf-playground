@@ -44,9 +44,12 @@ jobs:
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               echo "file: $file"
               #if [[ $file =~ '_Test.cls' ]]; then
-              if echo "$file" | grep -q "$pattern"; then
+              #if echo "$file" | grep -q "$pattern"; then
+              if [[ $file =~ '_Test' ]]; then
+                if [[ $file =~ '.cls' ]]; then
                   echo "read $file"
                   CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
+                fi
               fi
             done
             #echo "TESTCLASSLIST:"
