@@ -42,13 +42,14 @@ jobs:
             CLASSLIST=''
             tmpfile=''
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+              echo "file: $file"
               if [[ $file =~ "_Test" ]] && [[ $file =~ ".cls" ]]; then
                   CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
               fi
             done
             #echo "TESTCLASSLIST:"
             #echo ${{ vars.TESTCLASSLIST }}
-            echo "CLASSLIST: $CLASSLIST"
+            echo "FINAL CLASSLIST: $CLASSLIST"
             echo "$CLASSLIST" | sed 's/\,$//'
             if [[ $CLASSLIST != '' ]]; then
              npm install @salesforce/cli --global
