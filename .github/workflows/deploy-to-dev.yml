@@ -42,19 +42,19 @@ jobs:
             CLASSLIST=''
             tmpfile=''
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-              if [[ $file =~ "_Test" ]]; then
+              if [[ $file =~ "_Test" && $file =~ ".cls" ]]; then
                   CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
               fi
             done
-            echo "TESTCLASSLIST:"
-            echo ${{ vars.TESTCLASSLIST }}
-            echo "CLASSLIST:"
+            #echo "TESTCLASSLIST:"
+            #echo ${{ vars.TESTCLASSLIST }}
+            echo "CLASSLIST: $CLASSLIST"
             echo "$CLASSLIST" | sed 's/\,$//'
             if [[ $CLASSLIST != '' ]]; then
              npm install @salesforce/cli --global
              echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > server.key
              sfdx force:auth:jwt:grant --client-id=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwt-key-file=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --set-default-dev-hub --alias devjwt        
-             sfdx force:apex:test:run -l RunSpecifiedTests --class-names "`echo "$CLASSLIST" | sed 's/\,$//'`" --synchronous --result-format human --loglevel error -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+             sfdx apex:test:run -l RunSpecifiedTests --class-names "`echo "$CLASSLIST" | sed 's/\,$//'`" --synchronous --result-format human --loglevel error -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
             fi
 
   deployment:
