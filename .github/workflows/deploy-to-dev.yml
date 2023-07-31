@@ -50,6 +50,7 @@ jobs:
             #echo "TESTCLASSLIST:"
             #echo ${{ vars.TESTCLASSLIST }}
             echo "FINAL CLASSLIST: $CLASSLIST"
+            mkdir -p ./testlog/
             if [[ $CLASSLIST != '' ]]; then
              npm install @salesforce/cli --global
              echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > server.key
