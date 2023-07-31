@@ -36,15 +36,16 @@ jobs:
           uses: tj-actions/changed-files@v37
 
         # NOTE: `since_last_remote_commit: true` is implied by default and falls back to the previous local commit.
-        - name: List all changed files
+        - name: List all changed files 2
           id: set-apex-list
           run: |
             CLASSLIST=''
-            tmpfile=''
+            pattern="_Test.cls"
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               echo "file: $file"
               #if [[ $file =~ '_Test.cls' ]]; then
-              if echo "$file" | grep -q "_Test.cls"; then
+              if echo "$file" | grep -q "$pattern"; then
+                  echo "read $file"
                   CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
               fi
             done
