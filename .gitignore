@@ -6,7 +6,8 @@
 .*
 !/.gitignore
 pmd-apex-rules.xml
-script/*
+manifest/*
+scripts/*
 config/*
 .eslintignore
 .prettierrc
@@ -15,6 +16,7 @@ jest.config.js
 package.json
 sfdx-project.json
 *.md
+**/jsconfig.json
 
 
 # User-specific files
