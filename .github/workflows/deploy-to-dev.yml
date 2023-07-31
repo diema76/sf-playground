@@ -40,7 +40,7 @@ jobs:
           id: set-apex-list
           run: |
             CLASSLIST=''
-            pattern="_Test.cls"
+            pattern="_Test\.cls"
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               echo "file: $file"
               #if [[ $file =~ '_Test.cls' ]]; then
