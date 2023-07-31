@@ -41,14 +41,10 @@ jobs:
           run: |
             CLASSLIST=''
             pattern="_Test.cls$"
-            fileCheck='echo "$file" | grep -q "$pattern"'
-            fileExtract="echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'"
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-              echo "file: $file"
-              if [[ $fileCheck ]]; then
-                  echo "match: $file"
-                  #CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
-                  CLASSLIST+="`$fileExtract,"
+              #echo "file: $file"
+              if (echo "$file" | grep -q "$pattern"); then
+                  CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
               fi
             done
             #echo "TESTCLASSLIST:"
