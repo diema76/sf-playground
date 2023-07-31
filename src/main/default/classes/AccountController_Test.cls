@@ -9,6 +9,7 @@ public class AccountController_Test
     @isTest static void getAllActiveAccountsTest()
     {
         Test.startTest();
+        // test
         List<Account> accs = AccountController.getAllActiveAccounts();
         System.assertEquals(1,accs.size(),'1 account records should be returned');
         Test.stopTest();
