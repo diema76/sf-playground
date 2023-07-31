@@ -40,19 +40,11 @@ jobs:
           id: set-apex-list
           run: |
             CLASSLIST=''
-            pattern="_Test"
-            pattern2=".cls"
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               echo "file: $file"
-              #if [[ $file =~ '_Test.cls' ]]; then
-              if echo "$file" | grep -q "$pattern"; then
-              echo "match: pattern 1: $pattern"
-                if echo "$file" | grep -q "$pattern2"; then
-                  echo "match: pattern 2 : $pattern2"
+              if [[ $file =~ '_Test.cls' ]] && [[ $file !~ '_Test.cls-meta.xml' ]] ; then
+                  echo "match: $file"
                   CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
-                else
-                  echo "NOT match: pattern 2: $pattern2"
-                fi
               fi
             done
             #echo "TESTCLASSLIST:"
