@@ -36,7 +36,7 @@ jobs:
           uses: tj-actions/changed-files@v37
 
         # NOTE: `since_last_remote_commit: true` is implied by default and falls back to the previous local commit.
-        - name: List all changed files 2
+        - name: List all changed files
           id: set-apex-list
           run: |
             CLASSLIST=''
@@ -45,11 +45,9 @@ jobs:
               echo "file: $file"
               #if [[ $file =~ '_Test.cls' ]]; then
               #if echo "$file" | grep -q "$pattern"; then
-              if [[ $file =~ '_Test' ]]; then
-                if [[ $file =~ '.cls' ]]; then
+              if contains(fromJSON('["_Test", ".cls"]'), "$file"); then
                   echo "read $file"
                   CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
-                fi
               fi
             done
             #echo "TESTCLASSLIST:"
