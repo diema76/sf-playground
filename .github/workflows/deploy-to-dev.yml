@@ -45,7 +45,7 @@ jobs:
               echo "file: $file"
               #if [[ $file =~ '_Test.cls' ]]; then
               #if echo "$file" | grep -q "$pattern"; then
-              if "contains(fromJSON('["_Test", ".cls"]'), "$file")"; then
+              if [[ contains(fromJSON('["_Test", ".cls"]'), "$file") ]]; then
                   echo "read $file"
                   CLASSLIST+="`echo $file | sed -e 's/.*classes\/\(.*\)\.cls/\1/'`,"
               fi
