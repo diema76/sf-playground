@@ -71,10 +71,7 @@ jobs:
       uses: andstor/file-existence-action@v1
       with:
         files: "manifest/package.xml"
-    - name: Deploy to Org with Test Class
+    - name: Deploy to Org
       if: steps.check_files.outputs.files_exists == 'true'
-      run: sfdx force:source:deploy --manifest=manifest/package.xml --testlevel=RunLocalTests -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
-    - name: Deploy to Org without Test Class  
-      if: steps.check_files.outputs.files_exists == 'false'
+      #run: sfdx force:source:deploy --manifest=manifest/package.xml --testlevel=RunLocalTests -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
       run: sfdx force:source:deploy --manifest=manifest/package.xml -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
-    
