@@ -733,7 +733,7 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>WorkCalibrationUser</name>
-    </userPermissions> 
+    </userPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Account_Setting__mdt.Name</field>
