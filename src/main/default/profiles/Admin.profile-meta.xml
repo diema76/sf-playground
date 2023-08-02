@@ -743,5 +743,5 @@
         <editable>true</editable>
         <field>Account_Setting__mdt.Tipologia</field>
         <readable>true</readable>
-    </fieldPermissions>
+    </fieldPermissions> 
 </Profile>
