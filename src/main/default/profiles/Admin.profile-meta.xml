@@ -736,12 +736,12 @@
     </userPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Account_Setting__mdt.Name</field>
+        <field>Account_Setting__mdt.Name__c</field>
         <readable>true</readable>
       </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Account_Setting__mdt.Tipologia</field>
+        <field>Account_Setting__mdt.Tipologia__c</field>
         <readable>true</readable>
-    </fieldPermissions> 
+    </fieldPermissions>
 </Profile>
