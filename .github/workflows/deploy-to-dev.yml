@@ -46,15 +46,16 @@ jobs:
                   CLASSLIST+="`echo $file | ${{ secrets.SF_YAML_GETNAME }}`,"
               fi
             done
-            #echo "TESTCLASSLIST: ${{ vars.TESTCLASSLIST }}"
-            echo "FINAL CLASSLIST: $CLASSLIST"
+            echo "Found Apex Test Class: $CLASSLIST"
+            npm install @salesforce/cli --global
+            echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > server.key
+            sfdx force:auth:jwt:grant --client-id=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwt-key-file=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --set-default-dev-hub --alias devjwt                    
             if [[ $CLASSLIST != '' ]]; then
-             echo "Avvio run test class"
-             npm install @salesforce/cli --global
-             echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > server.key
-             sfdx force:auth:jwt:grant --client-id=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwt-key-file=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --set-default-dev-hub --alias devjwt        
+             echo "Run Apex Test Class"
              sfdx apex:test:run -l RunSpecifiedTests --class-names "`echo "$CLASSLIST" | sed 's/\,$//'`" --synchronous --result-format human --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --code-coverage 
             fi
+            echo "Run Validation package"
+            sfdx force:source:deploy --checkonly --manifest=manifest/package.xml -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
 
   deployment:
     name: Deployment section
