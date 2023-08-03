@@ -5,7 +5,7 @@ public class AccountController_Test
     static void makeData(){
         Account acc = new Account(Name = 'Pluto', Active__c = 'Yes');  
         insert acc;  
-    }
+    } 
     @isTest static void getAllActiveAccountsTest()
     {
         // test secondo utente
