@@ -50,7 +50,8 @@ jobs:
                 enableValidation=true
               fi
             done
-            echo "Found Apex Test Class: $CLASSLIST"
+            echo "Founded Apex Test Class: $CLASSLIST"
+            echo "Founded SF Resourse : $enableValidation"
             npm install @salesforce/cli --global
             echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > server.key
             sfdx force:auth:jwt:grant --client-id=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwt-key-file=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --set-default-dev-hub --alias devjwt                    
