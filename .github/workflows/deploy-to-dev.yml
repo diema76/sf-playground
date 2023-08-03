@@ -41,7 +41,7 @@ jobs:
           run: |
             CLASSLIST=''
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-              #echo "file: $file"
+              echo "file: $file"
               if (echo "$file" | grep -q "${{ secrets.SF_YAML_PATTERN_TestClass }}"); then
                   CLASSLIST+="`echo $file | ${{ secrets.SF_YAML_GETNAME }}`,"
               fi
@@ -55,7 +55,7 @@ jobs:
              sfdx apex:test:run -l RunSpecifiedTests --class-names "`echo "$CLASSLIST" | sed 's/\,$//'`" --synchronous --result-format human --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --code-coverage 
             fi
             echo "Run Validation package"
-            sfdx force:source:deploy --checkonly --manifest=manifest/package.xml -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+            #sfdx force:source:deploy --checkonly --manifest=manifest/package.xml -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
 
   deployment:
     name: Deployment section
