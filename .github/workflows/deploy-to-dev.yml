@@ -61,7 +61,7 @@ jobs:
             fi
             if [[ $enableValidation != '' ]]; then
               echo "Run Validation package [disabilitato]"
-              #sfdx force:source:deploy --checkonly --manifest=manifest/package.xml -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+              sfdx force:source:deploy --checkonly --manifest=manifest/package.xml -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
             fi
 
   deployment:
