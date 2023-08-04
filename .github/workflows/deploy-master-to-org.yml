@@ -32,4 +32,4 @@ jobs:
     - name: Deploy to Org
       if: steps.check_files.outputs.files_exists == 'true'
       #run: sfdx force:source:deploy --manifest=manifest/package.xml --testlevel=RunLocalTests -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
-      run: sf project deploy start --manifest=manifest/package.xml --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+      run: sf project deploy start -x manifest/package.xml --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
