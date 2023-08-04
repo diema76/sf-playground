@@ -60,7 +60,7 @@ jobs:
              sfdx apex:test:run -l RunSpecifiedTests --class-names "`echo "$CLASSLIST" | sed 's/\,$//'`" --synchronous --result-format human --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --code-coverage 
             fi
             if [[ $enableValidation != '' ]]; then
-              echo "Run Validation package [disabilitato]"
+              echo "Run Validation package"
               sfdx force:source:deploy --checkonly --manifest=manifest/package.xml -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
             fi
 
