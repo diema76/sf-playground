@@ -1,6 +1,6 @@
 @isTest
 public class AccountController_Test 
-{     
+{      
     @TestSetup
     static void makeData(){
         Account acc = new Account(Name = 'Pluto', Active__c = 'Yes');  
