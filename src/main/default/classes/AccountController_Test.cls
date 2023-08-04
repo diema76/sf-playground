@@ -7,6 +7,7 @@ public class AccountController_Test
         insert acc;   //test 
         // test checkonly
         // test sf project start cmd 4
+        // test sf yaml
     } 
     @isTest static void getAllActiveAccountsTest()
     {
