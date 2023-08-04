@@ -42,6 +42,7 @@ jobs:
           run: |
             CLASSLIST=''
             enableValidation=''
+            jobID=''
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               echo "file: $file"
               if (echo "$file" | grep -q "${{ secrets.SF_YAML_PATTERN_TestClass }}"); then
@@ -62,5 +63,6 @@ jobs:
             fi
             if [[ $enableValidation != '' ]]; then
               echo "Run Validation package"
-              sf project deploy validate --manifest=manifest/package.xml --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+              jobID=$(sf project deploy validate --manifest=manifest/package.xml --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }})
+              echo "jobID: $jobID"
             fi
