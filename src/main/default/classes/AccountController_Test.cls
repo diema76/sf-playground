@@ -6,7 +6,7 @@ public class AccountController_Test
         Account acc = new Account(Name = 'Pluto', Active__c = 'Yes');  
         insert acc;   //test 
         // test checkonly
-        // test sf project start cmd 3
+        // test sf project start cmd 4
     } 
     @isTest static void getAllActiveAccountsTest()
     {
