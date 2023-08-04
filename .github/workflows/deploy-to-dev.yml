@@ -61,7 +61,7 @@ jobs:
             fi
             if [[ $enableValidation != '' ]]; then
               echo "Run Validation package"
-              sf project deploy start --checkonly --manifest=manifest/package.xml --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
+              sf project deploy start validate --manifest=manifest/package.xml --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
             fi
 
   deployment:
