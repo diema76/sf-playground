@@ -8,14 +8,14 @@ on:
 
 jobs:
   test:
-    name: Deploy to DEV ORG Salesforce 
+    name: Inizializzation Deploy 
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - run: echo "🐧 GitHub Action running on ${{ runner.os }}"
 
   deployment:
-    name: Deployment section
+    name: Deploy to DEV ORG - Salesforce 
     runs-on: ubuntu-latest
     needs: [test]
     if: success() && contains('refs/heads/master', github.ref)
@@ -34,4 +34,3 @@ jobs:
         echo "${{ secrets.SALESFORCE_JWT_SECRET_KEY }}" > server.key
         sfdx force:auth:jwt:grant --client-id=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwt-key-file=server.key --username=${{ secrets.SALESFORCE_DEVHUB_USERNAME }} --set-default-dev-hub --alias devjwt
         sfdx force:source:deploy --manifest=manifest/package.xml --target-org ${{ secrets.SALESFORCE_DEVHUB_USERNAME }}
-        
